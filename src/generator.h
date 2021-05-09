@@ -12,8 +12,10 @@ public:
     ~Generator();
 
     double getSample();
+
     virtual void tick();
-private:
+
+protected:
     double sample;
 };
 
