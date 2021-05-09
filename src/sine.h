@@ -15,8 +15,6 @@ public:
 
     void tick() override;
 
-private:
-
 };
 
 
