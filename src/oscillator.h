@@ -24,5 +24,4 @@ protected:
     double phase;
 };
 
-
 #endif //ADSR_ENVELOPE_OSCILLATOR_H

@@ -14,5 +14,3 @@ void Sine::tick() {
     phase += frequency / sampleRate;
     sample = sin(TWOPI * phase);
 }
-
-
