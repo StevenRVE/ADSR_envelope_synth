@@ -4,11 +4,13 @@
 #include "generator.h"
 #include "oscillator.h"
 #include "sine.h"
+#include "synthesizer.h"
 
 
 int main() {
+    double sampleRate = 44100;
 
-    Sine sine(sampleRate);
+    Synthesizer synth(sampleRate);
 
     return 0;
 }

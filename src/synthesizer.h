@@ -6,6 +6,7 @@
 #define ADSR_ENVELOPE_SYNTHESIZER_H
 
 #include "generator.h"
+#include "sine.h"
 
 class Synthesizer : public Generator {
 public:
@@ -13,12 +14,12 @@ public:
 
     ~Synthesizer();
 
-    void noteOn();
+    void noteOn(double frequency);
 
-    void noteOff();
+    void noteOff(double frequency);
 
 protected:
-
+    Sine sine;
 };
 
 

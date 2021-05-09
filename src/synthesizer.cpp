@@ -3,16 +3,16 @@
 //
 
 #include "synthesizer.h"
-Synthesizer::Synthesizer(double sampleRate) : Generator(sampleRate)
+Synthesizer::Synthesizer(double sampleRate) : Generator(sampleRate), sine(sampleRate)
 {
 
 }
 
-void Synthesizer::noteOn() {
-
+void Synthesizer::noteOn(double frequency) {
+    sine.setFrequency(frequency);
 }
 
-void Synthesizer::noteOff() {
+void Synthesizer::noteOff(double frequency) {
 
 }
 
