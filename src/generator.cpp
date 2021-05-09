@@ -4,13 +4,12 @@
 
 #include "generator.h"
 
-Generator::Generator() {
+Generator::Generator(double sampleRate) : sampleRate(sampleRate)
+{
 
 }
 
-Generator::~Generator() {
-
-}
+Generator::~Generator() = default;
 
 double Generator::getSample() {
     return sample;

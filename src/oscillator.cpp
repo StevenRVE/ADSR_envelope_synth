@@ -4,15 +4,12 @@
 
 #include "oscillator.h"
 
-Oscillator::Oscillator()
-{
+
+Oscillator::Oscillator(double sampleRate) : Generator(sampleRate) {
 
 }
 
-Oscillator::~Oscillator()
-{
-
-}
+Oscillator::~Oscillator() = default;
 
 double Oscillator::getFrequency()
 {
@@ -23,4 +20,3 @@ void Oscillator::setFrequency(double frequency)
 {
     this->frequency = frequency;
 }
-

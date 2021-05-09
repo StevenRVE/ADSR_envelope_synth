@@ -6,10 +6,13 @@
 #define ADSR_ENVELOPE_OSCILLATOR_H
 
 #include "generator.h"
+#include <cmath>
+
+#define TWOPI 6.2831853071795864769252867665590
 
 class Oscillator : public Generator{
 public:
-    Oscillator();
+    Oscillator(double sampleRate);
     ~Oscillator();
 
     double getFrequency();
@@ -18,6 +21,7 @@ public:
 
 protected:
     double frequency;
+    double phase;
 };
 
 

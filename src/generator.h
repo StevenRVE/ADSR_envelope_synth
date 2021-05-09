@@ -6,9 +6,10 @@
 #define ADSR_ENVELOPE_GENERATOR_H
 
 
+
 class Generator {
 public:
-    Generator();
+    Generator(double sampleRate);
     ~Generator();
 
     double getSample();
@@ -16,7 +17,8 @@ public:
     virtual void tick();
 
 protected:
-    double sample;
+    double sample{};
+    double sampleRate;
 };
 
 
