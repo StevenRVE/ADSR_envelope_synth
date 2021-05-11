@@ -4,13 +4,13 @@
 
 #include "envelope.h"
 
-Envelope::Envelope(double sampleRate) : Generator(sampleRate)
+Envelope::Envelope(double sampleRate) : Generator(sampleRate), adsr()
 {
 
 }
 
-double Envelope::ADSR() {
-    return 0;
-}
-
 Envelope::~Envelope() = default;
+
+void Envelope::tick() {
+
+}

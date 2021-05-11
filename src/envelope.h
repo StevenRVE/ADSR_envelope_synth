@@ -6,13 +6,17 @@
 #define ADSR_ENVELOPE_ENVELOPE_H
 
 #include "generator.h"
+#include "adsr.h"
 
 class Envelope : public Generator {
 public:
     Envelope(double sampleRate);
     ~Envelope();
 
-    double ADSR();
+    void tick() override;
+
+private:
+    Adsr adsr;
 };
 
 
