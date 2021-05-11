@@ -4,13 +4,15 @@
 
 #include "sine.h"
 
-Sine::Sine(double sampleRate) : Oscillator(sampleRate){
+Sine::Sine(double sampleRate) : Oscillator(sampleRate)
+{
 
 }
 
 Sine::~Sine() = default;
 
-void Sine::tick() {
+void Sine::tick()
+{
     phase += frequency / sampleRate;
     sample = sin(TWOPI * phase);
 }
