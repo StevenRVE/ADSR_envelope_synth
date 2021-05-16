@@ -23,7 +23,7 @@ public:
 
     void releaseResources() override;
 
-    Synthesizer synth;
+    Synthesizer* synth;
 };
 
 #endif //TRACOLOR_AUDIOMODULEADAPTER_H

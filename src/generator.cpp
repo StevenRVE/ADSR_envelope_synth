@@ -18,3 +18,11 @@ double Generator::getSample() {
 void Generator::tick() {
 
 }
+
+void Generator::setFrequency(double frequency) {
+
+}
+
+double Generator::getFrequency() {
+    return 0;
+}

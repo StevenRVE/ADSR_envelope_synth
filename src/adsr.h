@@ -21,12 +21,14 @@ struct Adsr
         std::cout << "ADSR - constructor\n";
     }
 
-    ~Adsr();
+    ~Adsr() = default;
 
     int attack = 200;
     int decay = 100;
     double sustain = 0.5;
     int release = 100;
 };
+
+
 
 #endif //ADSR_ENVELOPE_ADSR_H

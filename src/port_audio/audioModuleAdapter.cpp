@@ -1,20 +1,20 @@
 //
 // PortAudio API wrapper made by Wouter Ensink
-// altered by Steven van Esch
+// Altered by Steven van Esch
 //
 
 #include "audioModuleAdapter.h"
 
 #include <utility>
 
-AudioModuleAdapter::AudioModuleAdapter(double sampleRate) {}
+AudioModuleAdapter::AudioModuleAdapter() = default;
 
 AudioModuleAdapter::~AudioModuleAdapter() = default;
 
 void AudioModuleAdapter::prepareToPlay (int sampleRate, int blockSize)
 {
     std::cout << "starting callback\n";
-    this->synth = synth(sampleRate);
+    synth = new Synthesizer(sampleRate, 440);
 }
 
 // both channels are added together in the input buffer and mixed with the synthesizer class
@@ -27,7 +27,8 @@ void AudioModuleAdapter::process (float* input, float* output, int numSamples, i
         auto right = input[sample * numChannels + 1];
         auto in = (left + right) / 2;
         // output
-        auto out = synth.getSample();
+        auto out = synth->getSample() * 0.5;
+        synth->tick();
 
         output[sample * numChannels] = out;
         output[sample * numChannels + 1] = out;

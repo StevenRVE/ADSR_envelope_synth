@@ -12,9 +12,13 @@ public:
     Generator(double sampleRate);
     ~Generator();
 
-    double getSample();
+    virtual double getSample();
 
     virtual void tick();
+
+    virtual void setFrequency(double frequency);
+
+    virtual double getFrequency();
 
 protected:
     double sample{};

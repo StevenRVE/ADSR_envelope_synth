@@ -3,10 +3,12 @@
 //
 
 #include "sine.h"
+#include <iostream>
+#include <cmath>
 
-Sine::Sine(double sampleRate) : Oscillator(sampleRate)
+Sine::Sine(double sampleRate, double frequency) : Oscillator(sampleRate)
 {
-
+    this->setFrequency(frequency);
 }
 
 Sine::~Sine() = default;

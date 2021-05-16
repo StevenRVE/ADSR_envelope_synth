@@ -15,13 +15,13 @@ public:
     Oscillator(double sampleRate);
     ~Oscillator();
 
-    double getFrequency();
+    double getFrequency() override;
 
-    void setFrequency(double frequency);
+    void setFrequency(double frequency) override;
 
 protected:
     double frequency;
-    double phase;
+    double phase = 0;
 };
 
 #endif //ADSR_ENVELOPE_OSCILLATOR_H

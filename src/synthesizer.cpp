@@ -3,17 +3,34 @@
 //
 
 #include "synthesizer.h"
-Synthesizer::Synthesizer(double sampleRate) : Generator(sampleRate), sine(sampleRate)
+Synthesizer::Synthesizer(double sampleRate, double frequency) : Generator(sampleRate)
+{
+    envelope = new Envelope(sampleRate);
+    oscillator = new Square(sampleRate, frequency);
+}
+
+Synthesizer::~Synthesizer() = default;
+
+void Synthesizer::noteOn(double frequency)
+{
+    this->oscillator->setFrequency(frequency);
+}
+
+void Synthesizer::noteOff(double frequency)
 {
 
 }
 
-void Synthesizer::noteOn(double frequency) {
-    sine.setFrequency(frequency);
+void Synthesizer::tick()
+{
+    this->oscillator->tick();
 }
 
-void Synthesizer::noteOff(double frequency) {
-
+void Synthesizer::setFrequency(double frequency) {
+    this->oscillator->setFrequency(frequency);
 }
 
-Synthesizer::~Synthesizer() = default;
+double Synthesizer::getSample()
+{
+    return oscillator->getSample();
+}

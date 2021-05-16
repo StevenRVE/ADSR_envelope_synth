@@ -7,9 +7,10 @@
 
 #include "oscillator.h"
 
-class Square : Oscillator{
+class Square : public Oscillator{
 public:
-    Square(double sampleRate);
+    Square(double sampleRate, double frequency);
+
     ~Square();
 
     void tick() override;

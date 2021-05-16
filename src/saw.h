@@ -6,11 +6,10 @@
 #define ADSR_ENVELOPE_SAW_H
 
 #include "oscillator.h"
-#include <cmath>
 
 class Saw : public Oscillator{
 public:
-    Saw(double sampleRate);
+    Saw(double sampleRate, double frequency);
 
     ~Saw();
 

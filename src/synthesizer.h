@@ -7,10 +7,13 @@
 
 #include "generator.h"
 #include "sine.h"
+#include "saw.h"
+#include "square.h"
+#include "envelope.h"
 
 class Synthesizer : public Generator {
 public:
-    Synthesizer(double sampleRate);
+    Synthesizer(double sampleRate, double frequency);
 
     ~Synthesizer();
 
@@ -18,8 +21,15 @@ public:
 
     void noteOff(double frequency);
 
+    void tick() override;
+
+    void setFrequency(double frequency) override;
+
+    double getSample() override;
+
 protected:
-    Sine sine;
+    Generator* oscillator;
+    Generator* envelope;
 };
 
 
