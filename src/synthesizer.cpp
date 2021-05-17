@@ -15,9 +15,8 @@ Synthesizer::~Synthesizer() = default;
 void Synthesizer::noteOn(double frequency)
 {
     this->oscillator->setFrequency(frequency);
-    if (envelope.getCurrentStage() == Envelope::EnvelopeStage::off) {
-        envelope.enterStage(Envelope::EnvelopeStage::attack);
-    }
+    envelope.enterStage(Envelope::EnvelopeStage::attack);
+
 }
 
 void Synthesizer::noteOff()

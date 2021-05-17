@@ -2,7 +2,6 @@
 #include "port_audio/port_audio.h"
 #include "port_audio/audioModuleAdapter.h"
 
-
 int main() {
     auto sampleRate = 44100;
     auto blockSize = 64;
@@ -26,9 +25,45 @@ int main() {
                 portAudio.teardown();
                 break;
             case 'a':
-                audioProcess.synth->noteOn(500);
+                audioProcess.synth->noteOn(130.81);
                 break;
             case 'z':
+                audioProcess.synth->noteOff();
+                break;
+            case 's':
+                audioProcess.synth->noteOn(146.83);
+                break;
+            case 'x':
+                audioProcess.synth->noteOff();
+                break;
+            case 'd':
+                audioProcess.synth->noteOn(164.81);
+                break;
+            case 'c':
+                audioProcess.synth->noteOff();
+                break;
+            case 'f':
+                audioProcess.synth->noteOn(	174.61);
+                break;
+            case 'v':
+                audioProcess.synth->noteOff();
+                break;
+            case 'g':
+                audioProcess.synth->noteOn(	196.00);
+                break;
+            case 'b':
+                audioProcess.synth->noteOff();
+                break;
+            case 'h':
+                audioProcess.synth->noteOn(	220.00);
+                break;
+            case 'n':
+                audioProcess.synth->noteOff();
+                break;
+            case 'j':
+                audioProcess.synth->noteOn(	246.94);
+                break;
+            case 'm':
                 audioProcess.synth->noteOff();
                 break;
         }
