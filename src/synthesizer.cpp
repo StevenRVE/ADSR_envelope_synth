@@ -22,9 +22,7 @@ void Synthesizer::noteOn(double frequency)
 
 void Synthesizer::noteOff()
 {
-    if (envelope.getCurrentStage() == Envelope::EnvelopeStage::sustain) {
-        envelope.enterStage(Envelope::EnvelopeStage::release);
-    }
+    envelope.enterStage(Envelope::EnvelopeStage::release);
 }
 
 void Synthesizer::tick()

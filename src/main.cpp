@@ -24,8 +24,10 @@ int main() {
                 break;
             case 'a':
                 audioProcess.synth->noteOn(500);
+                break;
             case 'z':
                 audioProcess.synth->noteOff();
+                break;
         }
     }
 
