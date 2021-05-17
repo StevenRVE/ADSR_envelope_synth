@@ -5,11 +5,11 @@
 #ifndef ADSR_ENVELOPE_GENERATOR_H
 #define ADSR_ENVELOPE_GENERATOR_H
 
-
+#include "clock.h"
 
 class Generator {
 public:
-    Generator(double sampleRate);
+    Generator(class Clock* clock, double sampleRate);
     ~Generator();
 
     virtual double getSample();
@@ -21,6 +21,8 @@ public:
     virtual double getFrequency();
 
 protected:
+    class Clock* clock;
+
     double sample{};
     double sampleRate;
 };

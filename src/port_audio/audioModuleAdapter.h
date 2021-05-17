@@ -24,6 +24,7 @@ public:
     void releaseResources() override;
 
     Synthesizer* synth;
+    Clock ticker;
 };
 
 #endif //TRACOLOR_AUDIOMODULEADAPTER_H

@@ -4,7 +4,7 @@
 
 #include "square.h"
 
-Square::Square(double sampleRate, double frequency) : Oscillator(sampleRate)
+Square::Square(Clock* subject, double sampleRate, double frequency) : Oscillator(subject, sampleRate)
 {
     this->setFrequency(frequency);
 }

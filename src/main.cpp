@@ -12,6 +12,9 @@ int main() {
     PortAudio portAudio { audioProcess };
     portAudio.setup(sampleRate, blockSize);
 
+    std::cout << "Try the following input messages:\n";
+    std::cout << "Press 'a' to trigger noteOn\n";
+    std::cout << "Press 'z' to trigger noteOff\n";
     std::cout << "Press 'q' to quit the program.\n";
     bool running = true;
     while (running)

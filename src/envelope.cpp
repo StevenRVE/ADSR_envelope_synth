@@ -1,11 +1,12 @@
 //
 // Created by steve on 5/9/2021.
+// based on Martin Finke's blog about envelopes: http://www.martin-finke.de/blog/articles/audio-plugins-011-envelopes/
 //
 
 #include "envelope.h"
 
-Envelope::Envelope(double sampleRate) :
-Generator(sampleRate),
+Envelope::Envelope(Clock* subject, double sampleRate) :
+Generator(subject, sampleRate),
 minimumLevel(0.0001),
 currentStage(off),
 currentLevel(minimumLevel),
@@ -82,7 +83,6 @@ double Envelope::getSample()
             enterStage(newStage);
         }
         currentLevel *= multiplier;
-        tick();
     }
     return currentLevel;
 }

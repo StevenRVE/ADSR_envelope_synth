@@ -13,7 +13,7 @@
 
 class Synthesizer : public Generator {
 public:
-    Synthesizer(double sampleRate, double frequency);
+    Synthesizer(Clock* subject, double sampleRate, double frequency);
 
     ~Synthesizer();
 

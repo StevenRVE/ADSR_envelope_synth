@@ -4,7 +4,7 @@
 
 #include "generator.h"
 
-Generator::Generator(double sampleRate) : sampleRate(sampleRate)
+Generator::Generator(Clock* subject, double sampleRate) : sampleRate(sampleRate), clock(subject)
 {
 
 }

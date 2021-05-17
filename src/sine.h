@@ -9,7 +9,7 @@
 
 class Sine : public Oscillator{
 public:
-    Sine(double sampleRate, double frequency);
+    Sine(Clock* subject, double sampleRate, double frequency);
 
     ~Sine();
 

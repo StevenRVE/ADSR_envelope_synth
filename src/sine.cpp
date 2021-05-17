@@ -6,7 +6,7 @@
 #include <iostream>
 #include <cmath>
 
-Sine::Sine(double sampleRate, double frequency) : Oscillator(sampleRate)
+Sine::Sine(Clock* subject, double sampleRate, double frequency) : Oscillator(subject, sampleRate)
 {
     this->setFrequency(frequency);
 }

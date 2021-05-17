@@ -14,7 +14,7 @@ AudioModuleAdapter::~AudioModuleAdapter() = default;
 void AudioModuleAdapter::prepareToPlay (int sampleRate, int blockSize)
 {
     std::cout << "starting callback\n";
-    synth = new Synthesizer(sampleRate, 440);
+    synth = new Synthesizer(&ticker, sampleRate, 440);
 }
 
 // both channels are added together in the input buffer and mixed with the synthesizer class
@@ -28,7 +28,7 @@ void AudioModuleAdapter::process (float* input, float* output, int numSamples, i
         auto in = (left + right) / 2;
         // output
         auto out = synth->getSample() * 0.5;
-        synth->tick();
+        ticker.tick();
 
         output[sample * numChannels] = out;
         output[sample * numChannels + 1] = out;

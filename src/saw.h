@@ -9,7 +9,7 @@
 
 class Saw : public Oscillator{
 public:
-    Saw(double sampleRate, double frequency);
+    Saw(Clock* subject, double sampleRate, double frequency);
 
     ~Saw();
 

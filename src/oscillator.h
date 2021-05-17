@@ -12,7 +12,7 @@
 
 class Oscillator : public Generator{
 public:
-    Oscillator(double sampleRate);
+    Oscillator(Clock* subject, double sampleRate);
     ~Oscillator();
 
     double getFrequency() override;

@@ -21,3 +21,7 @@ https://www.cplusplus.com/reference/cmath/fmax/
 
 switch:
 https://en.cppreference.com/w/cpp/language/switch
+
+Observer design pattern:
+- https://sourcemaking.com/design_patterns/observer/cpp/3
+- https://www.youtube.com/watch?v=_BpmfnqjgzQ&t=3s

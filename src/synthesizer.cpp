@@ -3,11 +3,11 @@
 //
 
 #include "synthesizer.h"
-Synthesizer::Synthesizer(double sampleRate, double frequency) :
-Generator(sampleRate),
-envelope(sampleRate)
+Synthesizer::Synthesizer(Clock* subject, double sampleRate, double frequency) :
+Generator(subject, sampleRate),
+envelope(subject, sampleRate)
 {
-    oscillator = new Square(sampleRate, frequency);
+    oscillator = new Square(subject, sampleRate, frequency);
 }
 
 Synthesizer::~Synthesizer() = default;

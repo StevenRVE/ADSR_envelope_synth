@@ -11,7 +11,7 @@
 
 class Envelope : public Generator {
 public:
-    Envelope(double sampleRate);
+    Envelope(Clock* subject, double sampleRate);
     ~Envelope();
 
     enum EnvelopeStage {

@@ -4,7 +4,7 @@
 
 #include "saw.h"
 
-Saw::Saw(double sampleRate, double frequency) : Oscillator(sampleRate)
+Saw::Saw(Clock* subject, double sampleRate, double frequency) : Oscillator(subject, sampleRate)
 {
     this->setFrequency(frequency);
 }

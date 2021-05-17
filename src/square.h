@@ -9,7 +9,7 @@
 
 class Square : public Oscillator{
 public:
-    Square(double sampleRate, double frequency);
+    Square(Clock* subject, double sampleRate, double frequency);
 
     ~Square();
 

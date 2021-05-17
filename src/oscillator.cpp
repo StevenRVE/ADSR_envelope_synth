@@ -5,7 +5,7 @@
 #include "oscillator.h"
 
 
-Oscillator::Oscillator(double sampleRate) : Generator(sampleRate) {
+Oscillator::Oscillator(Clock* subject, double sampleRate) : Generator(subject, sampleRate) {
 
 }
 
