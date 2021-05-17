@@ -3,9 +3,10 @@
 //
 
 #include "synthesizer.h"
-Synthesizer::Synthesizer(double sampleRate, double frequency) : Generator(sampleRate)
+Synthesizer::Synthesizer(double sampleRate, double frequency) :
+Generator(sampleRate),
+envelope(sampleRate)
 {
-    envelope = new Envelope(sampleRate);
     oscillator = new Square(sampleRate, frequency);
 }
 
@@ -14,11 +15,16 @@ Synthesizer::~Synthesizer() = default;
 void Synthesizer::noteOn(double frequency)
 {
     this->oscillator->setFrequency(frequency);
+    if (envelope.getCurrentStage() == Envelope::EnvelopeStage::off) {
+        envelope.enterStage(Envelope::EnvelopeStage::attack);
+    }
 }
 
-void Synthesizer::noteOff(double frequency)
+void Synthesizer::noteOff()
 {
-
+    if (envelope.getCurrentStage() == Envelope::EnvelopeStage::sustain) {
+        envelope.enterStage(Envelope::EnvelopeStage::release);
+    }
 }
 
 void Synthesizer::tick()
@@ -32,5 +38,7 @@ void Synthesizer::setFrequency(double frequency) {
 
 double Synthesizer::getSample()
 {
-    return oscillator->getSample();
+    double sample;
+    sample = oscillator->getSample() * envelope.getSample();
+    return sample;
 }

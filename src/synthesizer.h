@@ -19,7 +19,7 @@ public:
 
     void noteOn(double frequency);
 
-    void noteOff(double frequency);
+    void noteOff();
 
     void tick() override;
 
@@ -29,7 +29,7 @@ public:
 
 protected:
     Generator* oscillator;
-    Generator* envelope;
+    Envelope envelope;
 };
 
 
