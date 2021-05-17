@@ -6,7 +6,7 @@
 
 Generator::Generator(Clock* subject, double sampleRate) : sampleRate(sampleRate), clock(subject)
 {
-
+    clock->attach(this);
 }
 
 Generator::~Generator() = default;

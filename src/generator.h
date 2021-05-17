@@ -23,7 +23,7 @@ public:
 protected:
     class Clock* clock;
 
-    double sample{};
+    double sample;
     double sampleRate;
 };
 

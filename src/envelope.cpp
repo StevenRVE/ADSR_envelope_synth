@@ -25,7 +25,11 @@ Envelope::~Envelope() = default;
 
 void Envelope::tick()
 {
-    currentSampleIndex++;
+    if (currentStage != off && currentStage != sustain)
+    {
+        currentSampleIndex++;
+    }
+
 }
 
 void Envelope::enterStage(Envelope::EnvelopeStage newStage)

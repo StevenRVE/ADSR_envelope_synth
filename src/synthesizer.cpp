@@ -7,7 +7,7 @@ Synthesizer::Synthesizer(Clock* subject, double sampleRate, double frequency) :
 Generator(subject, sampleRate),
 envelope(subject, sampleRate)
 {
-    oscillator = new Square(subject, sampleRate, frequency);
+    oscillator = new Sine(subject, sampleRate, frequency);
 }
 
 Synthesizer::~Synthesizer() = default;
@@ -28,6 +28,7 @@ void Synthesizer::noteOff()
 void Synthesizer::tick()
 {
     this->oscillator->tick();
+//    std::cout << "Synth::tick() is being ticked! \n";
 }
 
 void Synthesizer::setFrequency(double frequency) {
