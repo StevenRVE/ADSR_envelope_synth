@@ -11,9 +11,6 @@
 // subject
 class Clock {
 public:
-    Clock();
-    ~Clock();
-
     void tick();
 
     void attach(class Generator* generator);

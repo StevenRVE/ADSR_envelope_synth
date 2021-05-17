@@ -4,16 +4,12 @@
 
 #include "clock.h"
 
-Clock::Clock() = default;
-
-Clock::~Clock() = default;
-
 void Clock::tick() {
-    for (int i = 0; i < observerList.size(); i++) {
+    for (long unsigned int i = 0; i < observerList.size(); i++) {
         observerList[i]->tick();
     }
 }
 
-void Clock::attach(Generator *generator) {
+void Clock::attach(Generator* generator) {
     observerList.push_back(generator);
 }

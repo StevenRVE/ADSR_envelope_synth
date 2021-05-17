@@ -21,7 +21,7 @@ public:
     virtual double getFrequency();
 
 protected:
-    class Clock* clock;
+    Clock* clock;
 
     double sample;
     double sampleRate;

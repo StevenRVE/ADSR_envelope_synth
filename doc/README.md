@@ -1,5 +1,7 @@
 ADSR Envelope Synth by Steven van Esch
 
+This is my synthesizer with ADSR.
+
 Sources:
 
 Audio plugins: envelopes by Martin Finke
