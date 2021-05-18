@@ -1,73 +1,67 @@
 //
-// Created by steve on 5/9/2021.
 // based on Martin Finke's blog about envelopes: http://www.martin-finke.de/blog/articles/audio-plugins-011-envelopes/
+// altered by Steven van Esch
 //
 
 #include "envelope.h"
 
 Envelope::Envelope(Clock* subject, double sampleRate) :
-Generator(subject, sampleRate),
-minimumLevel(0.0001),
-currentStage(off),
-currentLevel(minimumLevel),
-multiplier(1.0),
-currentSampleIndex(0),
-nextStageSampleIndex(0)
+        Generator(subject, sampleRate),
+        minimumLevel(0.0001),
+        currentState(off),
+        currentAmplitude(minimumLevel),
+        multiplier(1.0),
+        currentSampleIndex(0),
+        nextStateSampleIndex(0)
 {
-    stageValue[off] = 0.0;
-    stageValue[attack] = 1.2;
-    stageValue[decay] = 2.0;
-    stageValue[sustain] = 0.4;
-    stageValue[release] = 0.8;
+    adsrValue[off] = 0.0;
+    adsrValue[attack] = 0.1;
+    adsrValue[decay] = 0.5;
+    adsrValue[sustain] = 0.4;
+    adsrValue[release] = 0.3;
 }
 
 Envelope::~Envelope() = default;
 
 void Envelope::tick()
 {
-    if (currentStage != off && currentStage != sustain)
+    if (currentState != off && currentState != sustain)
     {
         currentSampleIndex++;
     }
-
 }
 
-void Envelope::enterStage(Envelope::Adsr newStage)
+void Envelope::enterState(Envelope::Adsr newState)
 {
-    currentStage = newStage;
+    currentState = newState;
     currentSampleIndex = 0;
-    if (currentStage == off || currentStage == sustain)
+    if (currentState == off || currentState == sustain)
     {
-        nextStageSampleIndex = 0;
+        nextStateSampleIndex = 0;
     }
     else
     {
-        nextStageSampleIndex = stageValue[currentStage] * sampleRate;
+        nextStateSampleIndex = adsrValue[currentState] * sampleRate;
     }
-    switch (newStage) {
+    switch (newState) {
         case off:
-            currentLevel = 0.0;
+            currentAmplitude = 0.0;
             multiplier = 1.0;
-            std::cout << "Adsr: off\n";
             break;
         case attack:
-            currentLevel = minimumLevel;
-            calculateMultiplier(currentLevel, 1.0, nextStageSampleIndex);
-            std::cout << "Adsr: attack\n";
+            currentAmplitude = minimumLevel;
+            calculateMultiplier(currentAmplitude, 1.0, nextStateSampleIndex);
             break;
         case decay:
-            currentLevel = 1.0;
-            calculateMultiplier(currentLevel, fmax(stageValue[sustain], minimumLevel), nextStageSampleIndex);
-            std::cout << "Adsr: decay\n";
+            currentAmplitude = 1.0;
+            calculateMultiplier(currentAmplitude, fmax(adsrValue[sustain], minimumLevel), nextStateSampleIndex);
             break;
         case sustain:
-            currentLevel = stageValue[sustain];
+            currentAmplitude = adsrValue[sustain];
             multiplier = 1.0;
-            std::cout << "Adsr: sustain\n";
             break;
         case release:
-            calculateMultiplier(currentLevel, minimumLevel, nextStageSampleIndex);
-            std::cout << "Adsr: release\n";
+            calculateMultiplier(currentAmplitude, minimumLevel, nextStateSampleIndex);
             break;
         default:
             break;
@@ -75,27 +69,42 @@ void Envelope::enterStage(Envelope::Adsr newStage)
 }
 
 // while in attack, decay or release stage, this function checks if the currentSampleIndex is equal to
-// nextStageSampleIndex and if not is ticks to the next index. If it is equal, we go to the next Adsr
+// nextStateSampleIndex and if not is ticks to the next index. If it is equal, we go to the next Adsr state
 double Envelope::getSample()
 {
-    if (currentStage != off && currentStage != sustain)
+    if (currentState != off && currentState != sustain)
     {
-        if (currentSampleIndex == nextStageSampleIndex)
+        if (currentSampleIndex == nextStateSampleIndex)
         {
-            Adsr newStage;
-            newStage = static_cast<Adsr>((currentStage + 1) % numEnvelopeStages);
-            enterStage(newStage);
+            Adsr newState;
+            newState = static_cast<Adsr>((currentState + 1) % numEnvelopeStates);
+            enterState(newState);
         }
-        currentLevel *= multiplier;
+        currentAmplitude *= multiplier;
     }
-    return currentLevel;
+    return currentAmplitude;
 }
 
-// multiplier to make the currentLevel exponential so we hear it linear
+// multiplier to make the currentAmplitude exponential so we hear it linear
 // based on https://www.musicdsp.org/en/latest/Synthesis/189-fast-exponential-envelope-generator.html
 // and http://www.martin-finke.de/blog/articles/audio-plugins-011-envelopes/
 void Envelope::calculateMultiplier(double startLevel, double endLevel, unsigned long long int lengthInSamples) {
     multiplier = 1.0 + (log(endLevel) - log(startLevel)) / (lengthInSamples);
 }
 
+void Envelope::setAttack(double att) {
+    adsrValue[attack] = att;
+}
+
+void Envelope::setDecay(double dec) {
+    adsrValue[decay] = dec;
+}
+
+void Envelope::setSustain(double sus) {
+    adsrValue[sustain] = sus;
+}
+
+void Envelope::setRelease(double rel) {
+    adsrValue[release] = rel;
+}
 

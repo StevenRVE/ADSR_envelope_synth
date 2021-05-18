@@ -20,27 +20,36 @@ public:
         decay,
         sustain,
         release,
-        numEnvelopeStages
+        numEnvelopeStates
     };
 
-    void enterStage(Adsr newStage);
+    void enterState(Adsr newState);
+
     double getSample() override;
-    inline Adsr getCurrentStage() const { return currentStage; }
-    const double minimumLevel;
 
     void tick() override;
 
-private:
-    Adsr currentStage;
+    void setAttack(double att);
 
-    double currentLevel;
+    void setDecay(double dec);
+
+    void setSustain(double sus);
+
+    void setRelease(double rel);
+
+private:
+    Adsr currentState;
+
+    const double minimumLevel;
+
+    double currentAmplitude;
     double multiplier;
-    double stageValue[numEnvelopeStages];
+    double adsrValue[numEnvelopeStates];
 
     void calculateMultiplier(double startLevel, double endLevel, unsigned long long lengthInSamples);
 
-    unsigned long long currentSampleIndex;
-    unsigned long long nextStageSampleIndex;
+    unsigned int currentSampleIndex;
+    unsigned int nextStateSampleIndex;
 };
 
 

@@ -27,8 +27,10 @@ public:
 
     double getSample() override;
 
+    void setAdsrValues(double att, double dec, double sus, double rel);
+
 protected:
-    Generator* oscillator;
+    Sine oscillator;
     Envelope envelope;
 };
 
