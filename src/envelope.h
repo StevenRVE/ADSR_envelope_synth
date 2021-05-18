@@ -7,14 +7,14 @@
 #define ADSR_ENVELOPE_ENVELOPE_H
 
 #include "generator.h"
-#include "adsr.h"
+#include <iostream>
 
 class Envelope : public Generator {
 public:
     Envelope(Clock* subject, double sampleRate);
     ~Envelope();
 
-    enum EnvelopeStage {
+    enum Adsr {
         off = 0,
         attack,
         decay,
@@ -23,15 +23,15 @@ public:
         numEnvelopeStages
     };
 
-    void enterStage(EnvelopeStage newStage);
+    void enterStage(Adsr newStage);
     double getSample() override;
-    inline EnvelopeStage getCurrentStage() const { return currentStage; }
+    inline Adsr getCurrentStage() const { return currentStage; }
     const double minimumLevel;
 
     void tick() override;
 
 private:
-    EnvelopeStage currentStage;
+    Adsr currentStage;
 
     double currentLevel;
     double multiplier;

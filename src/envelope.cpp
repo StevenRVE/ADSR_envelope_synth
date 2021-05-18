@@ -32,7 +32,7 @@ void Envelope::tick()
 
 }
 
-void Envelope::enterStage(Envelope::EnvelopeStage newStage)
+void Envelope::enterStage(Envelope::Adsr newStage)
 {
     currentStage = newStage;
     currentSampleIndex = 0;
@@ -48,26 +48,26 @@ void Envelope::enterStage(Envelope::EnvelopeStage newStage)
         case off:
             currentLevel = 0.0;
             multiplier = 1.0;
-            std::cout << "EnvelopeStage: off\n";
+            std::cout << "Adsr: off\n";
             break;
         case attack:
             currentLevel = minimumLevel;
             calculateMultiplier(currentLevel, 1.0, nextStageSampleIndex);
-            std::cout << "EnvelopeStage: attack\n";
+            std::cout << "Adsr: attack\n";
             break;
         case decay:
             currentLevel = 1.0;
             calculateMultiplier(currentLevel, fmax(stageValue[sustain], minimumLevel), nextStageSampleIndex);
-            std::cout << "EnvelopeStage: decay\n";
+            std::cout << "Adsr: decay\n";
             break;
         case sustain:
             currentLevel = stageValue[sustain];
             multiplier = 1.0;
-            std::cout << "EnvelopeStage: sustain\n";
+            std::cout << "Adsr: sustain\n";
             break;
         case release:
             calculateMultiplier(currentLevel, minimumLevel, nextStageSampleIndex);
-            std::cout << "EnvelopeStage: release\n";
+            std::cout << "Adsr: release\n";
             break;
         default:
             break;
@@ -75,15 +75,15 @@ void Envelope::enterStage(Envelope::EnvelopeStage newStage)
 }
 
 // while in attack, decay or release stage, this function checks if the currentSampleIndex is equal to
-// nextStageSampleIndex and if not is ticks to the next index. If it is equal, we go to the next EnvelopeStage
+// nextStageSampleIndex and if not is ticks to the next index. If it is equal, we go to the next Adsr
 double Envelope::getSample()
 {
     if (currentStage != off && currentStage != sustain)
     {
         if (currentSampleIndex == nextStageSampleIndex)
         {
-            EnvelopeStage newStage;
-            newStage = static_cast<EnvelopeStage>((currentStage + 1) % numEnvelopeStages);
+            Adsr newStage;
+            newStage = static_cast<Adsr>((currentStage + 1) % numEnvelopeStages);
             enterStage(newStage);
         }
         currentLevel *= multiplier;

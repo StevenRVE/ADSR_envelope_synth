@@ -15,13 +15,13 @@ Synthesizer::~Synthesizer() = default;
 void Synthesizer::noteOn(double frequency)
 {
     this->oscillator->setFrequency(frequency);
-    envelope.enterStage(Envelope::EnvelopeStage::attack);
+    envelope.enterStage(Envelope::Adsr::attack);
 
 }
 
 void Synthesizer::noteOff()
 {
-    envelope.enterStage(Envelope::EnvelopeStage::release);
+    envelope.enterStage(Envelope::Adsr::release);
 }
 
 void Synthesizer::tick()
