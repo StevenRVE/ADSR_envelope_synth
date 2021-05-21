@@ -14,11 +14,11 @@ int main() {
     PortAudio portAudio { audioProcess };
     portAudio.setup(sampleRate, blockSize);
 
-    audioProcess.synth->setAdsrValues(0.8, 0.2, 0.2, 0.6);
+    audioProcess.synth->setAdsrValues(0.1, 0.4, 0.5, 1.0);
 
     std::cout << "Try the following input messages:\n";
-    std::cout << "Press 'a' to trigger noteOn\n";
-    std::cout << "Press 'z' to trigger noteOff\n";
+    std::cout << "Press 'a','s','d','f','g','h','j' to trigger noteOn\n";
+    std::cout << "Press 'z','x','c','v','b','n','m' to trigger noteOff\n";
     std::cout << "Press 'q' to quit the program.\n";
 
     // TODO make better system for capturing keyPressed or use virtual midi keyboard or midi keyboard input
